@@ -17,7 +17,7 @@ services:
       - tor-privoxy:tor
     environment:
       PROXY_HOST: tor
-      CHROME_PATH: /usr/bin/google-chrome
+      CHROME_PATH: /usr/bin/chromium
     volumes:
       - ./results:/app/results:z
       - ./config:/app/config:z
