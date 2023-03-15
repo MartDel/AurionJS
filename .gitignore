@@ -126,3 +126,4 @@ dist
 .pnp.*
 credentials.json
 secrets.json
+google_*.json

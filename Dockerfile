@@ -1,8 +1,5 @@
 FROM node:slim
 
-ARG USER_ID
-ARG GROUP_ID
-
 # We don't need the standalone Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
@@ -22,10 +19,5 @@ COPY ["package.json", "package-lock.json*", "./"]
 RUN npm install
 
 COPY . .
-
-RUN groupadd -f -g $GROUP_ID user
-RUN useradd -u $USER_ID -g $GROUP_ID user
-
-USER user
 
 CMD [ "node", "main.js" ]

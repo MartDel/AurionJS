@@ -1,6 +1,13 @@
 version: "3.8"
 
 services:
+  tor-privoxy:
+    image: dperson/torproxy
+    volumes:
+      - ./proxy:/etc/tor/torrc.d
+    ports:
+      - "9050:9050" # Tor proxy
+
   app:
     build: .
     depends_on:
@@ -12,11 +19,11 @@ services:
       PROXY_HOST: tor
       CHROME_PATH: /usr/bin/google-chrome
     volumes:
-      - ./results:/app/results
+      - ./results:/app/results:z
+      - ./config:/app/config:z
 
-  tor-privoxy:
-    image: dperson/torproxy
+  upload:
+    build: ./upload
     volumes:
-      - ./proxy:/etc/tor/torrc.d
-    ports:
-      - "9050:9050" # Tor proxy
+      - ./results:/app/ics:z
+      - ./config:/app/credentials:z

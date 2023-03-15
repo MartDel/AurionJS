@@ -1,6 +1,6 @@
 const ics = require('ics');
 const fs = require('fs');
-const config = require('./config.json');
+const config = require('./config/aurion.json');
 const readline = require('readline');
 const Writable = require('stream').Writable;
 

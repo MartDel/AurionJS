@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const config = require('./config.json');
+const config = require('./config/aurion.json');
 const lib = require('./lib');
 const fsPromises = require('fs/promises');
 
@@ -105,7 +105,13 @@ let getOneWeek = async (page, changerDePage) => {
 };
 
 (async () => {
-    if (!require('./secrets.json') || !require('./secrets.json').hasOwnProperty('username') || !require('./secrets.json').hasOwnProperty('password')) {
+    if (require('./config/secrets.json')) {
+        const secrets = require('./config/secrets.json');
+        config.username = secrets.username;
+        config.password = secrets.password;
+    }
+
+    if (!config.hasOwnProperty('username') || !config.hasOwnProperty('password')) {
         // AurionJS isn't configured for now
         console.log('Vous devez configurer AurionJS lors de la première utilisation.');
         console.log('Pas de soucis à se faire, après vous serez tranquille !\n');
@@ -127,7 +133,7 @@ let getOneWeek = async (page, changerDePage) => {
         // Update the config object
         config.username = username;
         config.password = password;
-        await fsPromises.writeFile('./secrets.json', JSON.stringify(config, null, 4));
+        await fsPromises.writeFile('./config/secrets.json', JSON.stringify(config, null, 4));
         console.log("Le fichier configuration a été modifié... Ne le laissez pas trainer n'importe où !\n");
     }
 
