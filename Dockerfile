@@ -1,5 +1,8 @@
 FROM node:slim
 
+ENV TZ="Europe/Paris"
+# RUN timedatectl set-timezone 'Europe/Paris'
+
 # We don't need the standalone Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
