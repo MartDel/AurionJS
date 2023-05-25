@@ -36,7 +36,7 @@ const connection = async (page) => {
     await page.focus('#password');
     await page.keyboard.type(config.password);
     console.log('password typed');
-    page.click('#j_idt28');
+    page.click('#j_idt38');
 };
 
 const landingPageToTimeTable = async (page) => {
